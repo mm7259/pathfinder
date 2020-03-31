@@ -265,20 +265,22 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
           .replaceAll("JWT_TOKEN", "\"+jwtToken+\"") ;
     }
     
-    @Autowired
-    Environment env; 
+    // @Autowired
+    // Environment env; 
 
     private String getSurveyContent() throws IOException{   
-      String path = env.getProperty("surveyPath");
-      String surveyJson = "";
-      if (!path.isEmpty()){
-        Path surveyPath = Paths.get(path); 
-        if (Files.exists(surveyPath) && !Files.isDirectory(surveyPath)){
-            surveyJson = new String(Files.readAllBytes(surveyPath));
-          }
-      } else {
-        surveyJson = getResourceAsString("survey.json");
-      }
+    //   String path = env.getProperty("surveyPath");
+    //   String surveyJson = "";
+    //   if (!path.isEmpty()){
+    //     Path surveyPath = Paths.get(path); 
+    //     if (Files.exists(surveyPath) && !Files.isDirectory(surveyPath)){
+    //         surveyJson = new String(Files.readAllBytes(surveyPath));
+    //       }
+    //   } else {
+    //     surveyJson = getResourceAsString("survey.json");
+    //   }
+
+      String surveyJson = getResourceAsString("survey.json");
       String surveyJs = getResourceAsString("application-survey.js");
       return surveyJs.replace("$$QUESTIONS_JSON$$", surveyJson);
     }
