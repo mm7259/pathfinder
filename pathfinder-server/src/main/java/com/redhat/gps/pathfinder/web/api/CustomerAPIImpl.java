@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -261,6 +262,8 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
     }
     
     private String getSurveyContent() throws IOException{
+
+      File customSurveyDir = new File("/home/jboss/survey.json");
       String surveyJson = getResourceAsString("survey.json");
       String surveyJs = getResourceAsString("application-survey.js");
       return surveyJs.replace("$$QUESTIONS_JSON$$", surveyJson);
