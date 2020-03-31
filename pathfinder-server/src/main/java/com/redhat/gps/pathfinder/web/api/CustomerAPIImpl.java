@@ -63,6 +63,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Joiner;
@@ -263,13 +265,20 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
           .replaceAll("JWT_TOKEN", "\"+jwtToken+\"") ;
     }
     
-    private String getSurveyContent() throws IOException{
-      Path surveyPath = Paths.get("/home/jboss/survey.json"); 
+    @Autowired
+    Environment env; 
+    
+    private String getSurveyContent() throws IOException{   
+      String path = env.getProperty("application.surveyPath");
       String surveyJson = "";
-      if (Files.exists(surveyPath) && !Files.isDirectory(surveyPath)){
-        surveyJson = new String(Files.readAllBytes(surveyPath));
+      if (!path.isEmpty()){
+        Path surveyPath = Paths.get(path); 
+        if (Files.exists(surveyPath) && !Files.isDirectory(surveyPath)){
+            surveyJson = new String(Files.readAllBytes(surveyPath));
+          }
+      } else {
+        surveyJson = getResourceAsString("survey.json");
       }
-      surveyJson = getResourceAsString("survey.json");
       String surveyJs = getResourceAsString("application-survey.js");
       return surveyJs.replace("$$QUESTIONS_JSON$$", surveyJson);
     }
