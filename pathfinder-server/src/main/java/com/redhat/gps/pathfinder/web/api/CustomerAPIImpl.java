@@ -267,9 +267,9 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
     
     @Autowired
     Environment env; 
-    
+
     private String getSurveyContent() throws IOException{   
-      String path = env.getProperty("application.surveyPath");
+      String path = env.getProperty("surveyPath");
       String surveyJson = "";
       if (!path.isEmpty()){
         Path surveyPath = Paths.get(path); 
