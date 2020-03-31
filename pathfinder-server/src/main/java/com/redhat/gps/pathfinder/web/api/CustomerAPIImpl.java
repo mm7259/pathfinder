@@ -271,7 +271,7 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
     private String getSurveyContent() throws IOException{   
       String path = env.getProperty("surveyPath");
       String surveyJson = "";
-      if (!path.isEmpty()){
+      if (path!=null &&! path.isEmpty()){
         System.out.println("survey path environment variable is not empty");
         System.out.println(path);
         Path surveyPath = Paths.get(path); 
