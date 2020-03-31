@@ -37,4 +37,8 @@ public class ApplicationProperties {
 	public String getSurveyPath() {
 		return surveyPath;
 	}
+
+	public void setSurveyPath(String surveyPath) {
+		this.surveyPath = surveyPath; 
+	}
 }
