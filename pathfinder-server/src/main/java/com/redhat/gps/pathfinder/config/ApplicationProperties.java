@@ -32,13 +32,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-	private String surveyPath; 
-	
-	public String getSurveyPath() {
-		return surveyPath;
-	}
-
-	public void setSurveyPath(String surveyPath) {
-		this.surveyPath = surveyPath; 
-	}
 }
