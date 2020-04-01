@@ -108,6 +108,9 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
     private final ReviewsRepository reviewRepository;
     private final MembersRepository membersRepo;
 
+    @Value("${application.surveyPath:null}")
+    String surveyPath;
+
     public CustomerAPIImpl(CustomerRepository custRepo, ApplicationsRepository appsRepo, AssessmentsRepository assmRepo, ReviewsRepository reviewRepository, MembersRepository membersRepository) {
       super(membersRepository);
       this.custRepo = custRepo;
@@ -264,19 +267,14 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
           .replaceAll("\"SERVER_URL", "Utils.SERVER+\"")
           .replaceAll("JWT_TOKEN", "\"+jwtToken+\"") ;
     }
-    
-    @Autowired
-    Environment env; 
 
     private String getSurveyContent() throws IOException{   
-      String path = env.getProperty("surveyPath");
       String surveyJson = "";
-      if (path!=null &&! path.isEmpty()){
-        System.out.println("survey path environment variable is not empty");
-        System.out.println(path);
-        Path surveyPath = Paths.get(path); 
-        if (Files.exists(surveyPath) && !Files.isDirectory(surveyPath)){
-            surveyJson = new String(Files.readAllBytes(surveyPath));
+      if (surveyPath!=null && !surveyPath.isEmpty()){
+        Path path = Paths.get(surveyPath); 
+
+        if (Files.exists(path) && !Files.isDirectory(path)){
+            surveyJson = new String(Files.readAllBytes(path));
           }
       } else {
         surveyJson = getResourceAsString("survey.json");

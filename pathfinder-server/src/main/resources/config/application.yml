@@ -98,5 +98,6 @@ jhipster:
 # http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:
-    surveyPath: ${SURVEY_PATH}
+# surveyPath is the path to a custom survey.json file
+# application:
+#     surveyPath: ${SURVEY_PATH}
