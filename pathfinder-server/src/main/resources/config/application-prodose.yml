@@ -121,3 +121,4 @@ jhipster:
 keycloak.enabled: false
 
 application:
+    surveyPath: ${SURVEY_PATH}  
