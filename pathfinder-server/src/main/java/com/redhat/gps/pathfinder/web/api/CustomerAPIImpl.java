@@ -64,7 +64,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value; 
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Joiner;
@@ -108,7 +108,7 @@ public class CustomerAPIImpl extends SecureAPIImpl implements CustomersApi{
     private final ReviewsRepository reviewRepository;
     private final MembersRepository membersRepo;
 
-    @Value("${application.surveyPath:null}")
+    @Value( "${application.surveyPath:null}" )
     String surveyPath;
 
     public CustomerAPIImpl(CustomerRepository custRepo, ApplicationsRepository appsRepo, AssessmentsRepository assmRepo, ReviewsRepository reviewRepository, MembersRepository membersRepository) {
